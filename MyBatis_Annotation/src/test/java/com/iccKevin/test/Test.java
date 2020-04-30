@@ -25,9 +25,9 @@ public class Test {
         //2.创建SqlSessionFactory工厂
         SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
         SqlSessionFactory factory = builder.build(in);
-        //3.使用工厂生产SqlSession对象
+        //3.使用工厂生产SqlSession对象进行代理
         SqlSession session = factory.openSession();
-        //4.使用SqlSession创建Dao接口的代理对象
+        //4.使用SqlSession创建Dao接口的实现类
         IUserDao userDao = session.getMapper(IUserDao.class);
         //5.使用代理对象执行方法
         List<User> users = userDao.findAll();
