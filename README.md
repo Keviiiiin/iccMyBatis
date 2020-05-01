@@ -24,13 +24,35 @@
     
 * 第一步：读取配置文件
 
+    * 编译后，标注为Sources Root和Resources Root的目录下的所有配置文件将被放置到IDE build出来的对应结构的目录下，比如Web项目的WEB-INF/classes,Maven项目的target/classes,普通项目的out/production
+    
+    * 因此，src目录和resources目录下的文件，或是与该类同处一个目录，直接写文件名，如"pro.properties"，否则加上文件夹名，如"dao/pro.properties"。另外，以下方式1)要加"/",方式2)不用
+    
+    * 获取方式(getResourceAsStream同理)：   
+        
+        1)类名.class.getResource 
+            
+        2)类名.class.getClassLoader.getResource
+    
+    * <a href="https://cnblogs.com/robbinluobo/p/7931812.html">参考文章</a>
+        
 * 第二步：创建SqlSessionFactory工厂
 
+    * 构建者模式
+    
 * 第三步：创建SqlSession
+
+    * 调用的是工厂的openSession方法
 
 * 第四步：创建Dao接口的代理对象
 
+    * getMapper()，其实就是Proxy.newProxyInstance()
+    
+    * <a href="https://blog.csdn.net/qq_40645822/article/details/101844675">参考文章</a>
+
 * 第五步：执行dao中的方法
+
+    * 其实就是InvocationHandler接口的实现类调用invoke方法
 
 * 第六步：释放资源
 

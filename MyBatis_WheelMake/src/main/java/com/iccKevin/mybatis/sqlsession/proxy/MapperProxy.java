@@ -19,7 +19,7 @@ public class MapperProxy implements InvocationHandler {
     private Connection conn;
 
     public MapperProxy(Map<String,Mapper> mappers,Connection conn){
-        this.mappers = mappers;
+        this.mappers = mappers;//传入的参数是Configuration已经拿到的所有Map，赋值即可，不用追加
         this.conn = conn;
     }
 

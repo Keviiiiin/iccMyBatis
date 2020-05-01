@@ -90,7 +90,7 @@ public class XMLConfigBuilder {
                     String mapperPath = attribute.getValue();//获取属性的值"com/itheima/dao/IUserDao.xml"
                     //把映射配置文件的内容获取出来，封装成一个map
                     Map<String,Mapper> mappers = loadMapperConfiguration(mapperPath);
-                    //给configuration中的mappers赋值
+                    //把得到的Map集合放置到Configuration对象中
                     cfg.setMappers(mappers);
                 }else{
                     System.out.println("使用的是注解");

@@ -3,8 +3,9 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+<!--该配置文件的目录结构与dao接口的目录结构一致 -->
 <!--命名空间写dao接口的全限定类名-->
-<!--可能有多个数据库表需要查询，所以需要将命名空间和id组合在一起才能定位到SQL语句-->
+<!--可能有多个数据库表需要查询，所以需要将命名空间（类名）和id组合在一起才能定位到SQL语句-->
 <mapper namespace="com.iccKevin.dao.IUserDao">
     <!--配置查询所有-->
     <select id="findAll" resultType="com.iccKevin.domain.User">

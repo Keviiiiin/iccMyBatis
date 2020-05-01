@@ -15,6 +15,7 @@ public class Resources {
      * @return
      */
     public static InputStream getResourceAsStream(String filePath){
+        // 类加载器的getResource和getResourceAsStream方法是从编译后字节码文件的存放目录为根目录查找
         return Resources.class.getClassLoader().getResourceAsStream(filePath);
     }
 }

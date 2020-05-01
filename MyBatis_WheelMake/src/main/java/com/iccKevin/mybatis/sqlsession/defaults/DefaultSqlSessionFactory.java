@@ -8,7 +8,7 @@ import com.iccKevin.mybatis.sqlsession.SqlSessionFactory;
 /**
  * @author 黑马程序员
  * @Company http://www.ithiema.com
- * SqlSessionFactory接口的实现类
+ * SqlSessionFactory接口的实现类，用于生产SqlSession对象
  */
 public class DefaultSqlSessionFactory implements SqlSessionFactory{
 
@@ -20,7 +20,7 @@ public class DefaultSqlSessionFactory implements SqlSessionFactory{
 
     /**
      * 用于创建一个新的操作数据库对象
-     * @return
+     * @return 返回SqlSession接口的实现类
      */
     @Override
     public SqlSession openSession() {

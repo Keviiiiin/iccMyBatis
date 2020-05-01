@@ -8,7 +8,7 @@ package com.iccKevin.mybatis.cfg;
 public class Mapper {
 
     private String queryString;//SQL
-    private String resultType;//实体类的全限定类名
+    private String resultType;//结果集，即实体类的全限定类名
 
     public String getQueryString() {
         return queryString;

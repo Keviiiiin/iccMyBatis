@@ -12,6 +12,7 @@ import java.sql.Connection;
  * @author 黑马程序员
  * @Company http://www.ithiema.com
  * SqlSession接口的实现类
+ * 可以创建代理对象、释放资源
  */
 public class DefaultSqlSession implements SqlSession {
 
@@ -25,6 +26,7 @@ public class DefaultSqlSession implements SqlSession {
 
     /**
      * 用于创建代理对象
+     * 代理dao接口，因为代理的是接口，所以newProxyInstance的第二个参数直接把dao接口传进去
      * @param daoInterfaceClass dao的接口字节码
      * @param <T>
      * @return

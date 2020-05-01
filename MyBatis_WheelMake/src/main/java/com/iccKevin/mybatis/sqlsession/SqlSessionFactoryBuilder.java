@@ -14,7 +14,7 @@ import java.io.InputStream;
 public class SqlSessionFactoryBuilder {
 
     /**
-     * 根据参数的字节输入流来构建一个SqlSessionFactory工厂
+     * 根据参数的字节输入流，使用解析XML的工具类来构建一个SqlSessionFactory工厂
      * @param config
      * @return
      */
