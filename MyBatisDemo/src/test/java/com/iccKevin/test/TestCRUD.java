@@ -1,6 +1,7 @@
 package com.iccKevin.test;
 
 import com.iccKevin.dao.IUserDao;
+import com.iccKevin.domain.QueryVo;
 import com.iccKevin.domain.User;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -79,6 +80,19 @@ public class TestCRUD {
         List<User> users = userDao.findByName("李%");
         for (User user : users) {
             System.out.println(user);
+        }
+    }
+
+    @Test
+    public void testFindByVo(){
+        QueryVo vo = new QueryVo();
+        User user = new User();
+        user.setUsername("%王%");
+        vo.setUser(user);
+        //5.执行查询一个方法
+        List<User> users = userDao.findByVo(vo);
+        for(User u : users){
+            System.out.println(u);
         }
     }
 

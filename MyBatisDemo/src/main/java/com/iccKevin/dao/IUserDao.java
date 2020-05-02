@@ -1,5 +1,6 @@
 package com.iccKevin.dao;
 
+import com.iccKevin.domain.QueryVo;
 import com.iccKevin.domain.User;
 
 import java.util.List;
@@ -47,6 +48,13 @@ public interface IUserDao {
      * @return
      */
     List<User> findByName(String username);
+
+    /**
+     * 根据queryVo中的条件查询用户
+     * @param vo
+     * @return
+     */
+    List<User> findByVo(QueryVo vo);
 
     /**
      * 查询总用户数

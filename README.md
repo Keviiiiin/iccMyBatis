@@ -86,10 +86,34 @@ _明确：
     * 通过#{}可以实现 preparedStatement 向占位符中设置值，自动进行 java 类型和 jdbc 类型转换，#{}可以有效防止 sql 注入。 #{}可以接收简单类型值或 pojo 属性值。
     
     * 如果 parameterType 传输单个简单类型值， #{}括号中可以是 任意名称。
+    
+    * #{}将传入的数据都当成一个字符串，也就是给数据加一个""
 
 * ${}表示拼接 sql 串
     
     * 通过${}可以将 parameterType 传入的内容直接拼接在 sql 中且不进行 jdbc 类型转换， ${}可以接收简
-    单类型值或 pojo 属性值
+    单类型值或java对象属性值
     
     * 如果 parameterType 传输单个简单类型值， ${}括号中只能是 value。
+
+* 总结：#{}不会导致sql注入，而${}适用于order by 语句（不会产生多余的双引号）
+
+## OGNL表达式：
+   	
+   	Object Graphic Navigation Language
+   	
+   	对象	图	导航	   语言
+   	
+* 它是通过对象的取值方法来获取数据。在写法上把get给省略了。
+
+* 比如：我们获取用户的名称
+
+    * 类中的写法：user.getUsername();
+
+    * OGNL表达式写法：user.username
+
+* mybatis中为什么能直接写username,而不用user.呢：
+
+* 因为在parameterType中已经提供了属性所属的类，所以此时不需要写对象名
+
+## parameterType采用包装类对象QueryVo
