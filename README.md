@@ -85,7 +85,7 @@ _明确：
     
     * 通过#{}可以实现 preparedStatement 向占位符中设置值，自动进行 java 类型和 jdbc 类型转换，#{}可以有效防止 sql 注入。 #{}可以接收简单类型值或 pojo 属性值。
     
-    * 如果 parameterType 传输单个简单类型值， #{}括号中可以是 任意名称。
+    * 如果 parameterType 传输单个简单类型值， #{}括号中可以是 任意名称。----------------------[注1]
     
     * #{}将传入的数据都当成一个字符串，也就是给数据加一个""
 
@@ -121,3 +121,42 @@ _明确：
 * 当查询条件是综合的条件时，可以用包装对象QueryVo把条件封装起来
 
 * 实现需求：根据用户名模糊查询用户信息，其中查询条件放到QueryVo的User属性中
+
+_注意_
+
+* mysql数据库在windows系统中不区分大小写，所以keyColumn属性以及sql语句中（#{}里传的参数除外）的大小写是被忽略的，当然，不要忘记[注1] :)
+
+## 当实体类的属性名和数据库列名不匹配时
+
+### 解决方法一：别名查询
+
+```sql
+-- 其中，id,username是数据库列名，userId,userName是属性名
+select id as userId,username as userName,address as userAddress,sex as userSex,birthday as userBirthday
+from user
+```
+* 在sql语句的层面解决了问题，效率较高
+
+### 解决方法二：修改配置文件
+
+```xml
+<!-- 配置查询结果的列名和实体类的属性名的对应关系 -->
+<resultMap id="suibianxie" type="uSeR">
+    <!-- 主键字段的对应 -->
+    <id property="userId" column="id"></id>
+    <!--非主键字段的对应-->
+    <result property="userName" column="username"></result>
+    <result property="userAddress" column="address"></result>
+    <result property="userSex" column="sex"></result>
+    <result property="userBirthday" column="birthday"></result>
+</resultMap>
+
+<!--同时把resultType改成resultMap-->
+
+<!-- 查询所有 -->
+<select id="findAll" resultMap="suibianxie">
+    select * from user;
+</select>
+```
+
+* 增加了解析xml的时间，但不用改sql语句，提高了开发效率

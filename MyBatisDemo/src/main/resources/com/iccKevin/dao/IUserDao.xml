@@ -14,13 +14,14 @@
     
     <insert id="insertUser" parameterType="com.iccKevin.domain.User">
         <!-- 配置保存时获取插入的 id，插入成功后作为参数返回到User对象的id属性中 -->
+        <!-- keyColumn对应数据库中的列名，keyProperty是结果集的属性名-->
         <selectKey keyColumn="id" keyProperty="id" resultType="int">
             select last_insert_id();
         </selectKey>
         insert into user(username,address,sex,birthday)values(#{username},#{address},#{sex},#{birthday});
     </insert>
 
-    <delete id="deleteUser" parameterType="com.iccKevin.domain.User">
+    <delete id="deleteUser" parameterType="int">
         delete from user where id = #{id}
     </delete>
 

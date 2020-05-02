@@ -58,12 +58,12 @@ public class TestCRUD {
 
     @Test
     public void testDelete(){
-        userDao.deleteUser(53);
+        userDao.deleteUser(50);
     }
 
     @Test
     public void testUpdate(){
-        User user = new User(51,"李四",new Date(),"男","北京");
+        User user = new User(51,"李四",new Date(),"女","北京");
         userDao.updateUser(user);
     }
 
