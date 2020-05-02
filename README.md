@@ -80,3 +80,16 @@ _明确：
    		class SqlSessionFactoryBuilder
    		interface SqlSessionFactory
    		interface SqlSession
+## #{}与${}的区别
+* #{}表示一个占位符号
+    
+    * 通过#{}可以实现 preparedStatement 向占位符中设置值，自动进行 java 类型和 jdbc 类型转换，#{}可以有效防止 sql 注入。 #{}可以接收简单类型值或 pojo 属性值。
+    
+    * 如果 parameterType 传输单个简单类型值， #{}括号中可以是 任意名称。
+
+* ${}表示拼接 sql 串
+    
+    * 通过${}可以将 parameterType 传入的内容直接拼接在 sql 中且不进行 jdbc 类型转换， ${}可以接收简
+    单类型值或 pojo 属性值
+    
+    * 如果 parameterType 传输单个简单类型值， ${}括号中只能是 value。
