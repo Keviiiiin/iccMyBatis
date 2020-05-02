@@ -40,4 +40,17 @@ public interface IUserDao {
      * @return
      */
     User findById(int id);
+
+    /**
+     * 根据名称模糊查询用户信息
+     * @param username
+     * @return
+     */
+    List<User> findByName(String username);
+
+    /**
+     * 查询总用户数
+     * @return
+     */
+    int findTotal();
 }

@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -71,5 +72,19 @@ public class TestCRUD {
 //        System.out.println(user);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
         System.out.println(sdf.format(user.getBirthday()));
+    }
+
+    @Test
+    public void testFindByName(){
+        List<User> users = userDao.findByName("李%");
+        for (User user : users) {
+            System.out.println(user);
+        }
+    }
+
+    @Test
+    public void testFindTotal(){
+        int count = userDao.findTotal();
+        System.out.println("共有"+count+"条记录");
     }
 }
