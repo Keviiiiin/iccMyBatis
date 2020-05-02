@@ -14,4 +14,30 @@ public interface IUserDao {
      * @return
      */
     List<User> findAll();
+
+    /**
+     * 新增用户
+     * @param user
+     * @return 影响数据库记录的行数
+     */
+    int insertUser(User user);
+
+    /**
+     * 删除用户
+     * @param id
+     */
+    void deleteUser(int id);
+
+    /**
+     * 更新用户
+     * @param user
+     */
+    void updateUser(User user);
+
+    /**
+     * 根据id查询用户
+     * @param id
+     * @return
+     */
+    User findById(int id);
 }

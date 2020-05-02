@@ -22,9 +22,9 @@ public class MybatisTest {
      * @param args
      */
     public static void main(String[] args)throws Exception {
-        //1.读取配置文件
+        //1.读取配置文件，获得加载了配置文件的输入流
         InputStream in = Resources.getResourceAsStream("SqlMapConfig.xml");
-        //2.创建SqlSessionFactory工厂
+        //2.SqlSessionFactoryBuilder根据输入流构建工厂，返回SqlSessionFactory的实现类
         SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
         SqlSessionFactory factory = builder.build(in);
         //3.使用工厂生产SqlSession对象
