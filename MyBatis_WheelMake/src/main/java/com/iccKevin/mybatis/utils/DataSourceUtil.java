@@ -9,6 +9,7 @@ import java.sql.DriverManager;
  * @author 黑马程序员
  * @Company http://www.ithiema.com
  * 用于创建数据源的工具类
+ * 注册驱动、返回数据库连接对象
  */
 public class DataSourceUtil {
 

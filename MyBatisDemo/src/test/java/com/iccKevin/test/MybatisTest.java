@@ -25,7 +25,7 @@ public class MybatisTest {
         //2.创建SqlSessionFactory工厂
         SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
         SqlSessionFactory factory = builder.build(in);
-        //3.使用工厂生产SqlSession对象，session中包含select的一系列方法
+        //3.使用工厂生产SqlSession对象，session接口中包含select的一系列方法，由代理对象实现selectList的操作，对dao接口进行了增强
         SqlSession session = factory.openSession();
         //4.使用SqlSession的getMapper拿到代理对象，他完成创建dao接口实现类的工作
         IUserDao userDao = session.getMapper(IUserDao.class);
