@@ -118,7 +118,7 @@ _明确：
 
 ## parameterType采用包装类对象QueryVo
 
-* 当查询条件是综合的条件时，可以用包装对象QueryVo把条件封装起来
+* 当查询条件是_综合的条件_时，可以用包装对象QueryVo把条件封装起来
 
 * 实现需求：根据用户名模糊查询用户信息，其中查询条件放到QueryVo的User属性中
 
@@ -160,3 +160,21 @@ from user
 ```
 
 * 增加了解析xml的时间，但不用改sql语句，提高了开发效率
+
+## mybatis中的连接池
+
+* 配置的位置：
+
+    * 主配置文件SqlMapConfig.xml中的dataSource标签，type属性就是表示采用何种连接池方式。
+
+* type属性的取值：
+
+    * POOLED：采用传统的javax.sql.DataSource规范中的连接池，mybatis中有针对规范的实现
+
+    * UNPOOLED：采用传统的获取连接的方式，虽然也实现Javax.sql.DataSource接口，但是并没有使用池的思想。
+
+    * JNDI：采用_服务器_提供的JNDI技术实现，来获取DataSource对象，不同的服务器所能拿到的DataSource不一样。
+
+        * 注意：如果不是web或者maven的war工程，是不能使用的。
+
+        * tomcat服务器采用的连接池是dbcp连接池。

@@ -2,8 +2,10 @@
 <!DOCTYPE configuration
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
-<!-- mybatis的主配置文件 -->
+
 <configuration>
+
+    <properties resource="jdbcConfig.properties"></properties>
 
     <!--使用typeAliases配置别名，它只能配置domain中类的别名 -->
     <typeAliases>
@@ -12,7 +14,6 @@
 
         <!-- 用于指定要配置别名的包，当指定之后，该包下的所有实体类都会注册别名，并且类名就是别名，不再区分大小写-->
         <package name="com.iccKevin.domain"></package>
-        <package name="com.iccKevin.dao"></package>
     </typeAliases>
 
     <!-- 配置默认环境 -->
@@ -21,14 +22,11 @@
         <environment id="mysql">
             <!-- 配置事务的类型-->
             <transactionManager type="JDBC"></transactionManager>
-            <!-- 配置数据源（连接池） -->
             <dataSource type="POOLED">
-                <!-- 配置连接数据库的4个基本信息 -->
-                <!-- 可以在外面用properties标签将这些信息提取到另一个配置文件中 -->
-                <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost:3306/db3"/>
-                <property name="username" value="root"/>
-                <property name="password" value="root"/>
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
             </dataSource>
         </environment>
     </environments>
@@ -36,6 +34,7 @@
     <!-- 指定映射配置文件的位置，映射配置文件指的是每个dao独立的配置文件 -->
     <mappers>
         <!--<mapper resource="com/itheima/dao/IUserDao.xml"></mapper>-->
+
         <!-- package标签是用于指定dao接口所在的包,当指定了之后就不需要在写mapper标签的resource或者class了 -->
         <!-- 此种方法要求接口名称和映射文件名称相同，且放在同一个目录中。-->
         <package name="com.iccKevin.dao"></package>
