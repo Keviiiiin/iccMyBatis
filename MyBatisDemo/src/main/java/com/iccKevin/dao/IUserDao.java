@@ -18,6 +18,12 @@ public interface IUserDao {
     List<User> findAll();
 
     /**
+     * 多对多查询，查询用户信息并获得其对应的角色信息
+     * @return
+     */
+    List<User> findRole();
+
+    /**
      * 新增用户
      * @param user
      * @return 影响数据库记录的行数

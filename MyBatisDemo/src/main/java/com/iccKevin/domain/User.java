@@ -14,6 +14,7 @@ public class User implements Serializable{
     private String address;
 
     private List<Account> accounts;
+    private List<Role> roles;
 
     public User(){}
 
@@ -71,6 +72,14 @@ public class User implements Serializable{
 
     public void setAccounts(List<Account> accounts) {
         this.accounts = accounts;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 
     @Override

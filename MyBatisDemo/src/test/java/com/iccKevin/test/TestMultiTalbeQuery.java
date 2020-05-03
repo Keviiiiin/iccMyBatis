@@ -57,4 +57,12 @@ public class TestMultiTalbeQuery {
             System.out.println(u.getAccounts());
         }
     }
+    @Test
+    public void TestFindRole(){
+        List<User> users = userDao.findRole();
+        for (User u : users) {
+            System.out.println(u);
+            System.out.println(u.getRoles());
+        }
+    }
 }

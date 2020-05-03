@@ -21,6 +21,19 @@
         </collection>
     </resultMap>
 
+    <resultMap id="userRoleMap" type="user">
+        <id property="id" column="id"></id>
+        <result property="username" column="username"></result>
+        <result property="birthday" column="birthday"></result>
+        <result property="sex" column="sex"></result>
+        <result property="address" column="address"></result>
+        <collection property="roles" ofType="role">
+            <id column="rid" property="id"></id>
+            <result property="roleName" column="role_name"></result>
+            <result property="roleDesc" column="role_desc"></result>
+        </collection>
+    </resultMap>
+
     <!-- 抽取重复的语句代码片段 -->
     <sql id="defaultSelect">
         select * from user
@@ -28,6 +41,12 @@
 
     <select id="findAll" resultMap="userAccountMap">
         select u.*,a.id as aid,a.uid,a.money from user u left join account a on u.id = a.uid
+    </select>
+
+    <select id="findRole" resultMap="userRoleMap">
+        select u.*,r.id as rid,r.role_name as role_name,r.role_desc as role_desc from user u
+        left join user_role ur on u.id = ur.uid
+        left join role r on ur.rid = r.id
     </select>
     
     <insert id="insertUser" parameterType="User">
