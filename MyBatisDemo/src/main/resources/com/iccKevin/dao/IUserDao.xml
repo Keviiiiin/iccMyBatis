@@ -8,11 +8,11 @@
 <!--可能有多个数据库表需要查询，所以需要将命名空间（类名）和id组合在一起才能定位到SQL语句-->
 <mapper namespace="com.iccKevin.dao.IUserDao">
     <!--配置查询所有-->
-    <select id="findAll" resultType="com.iccKevin.domain.User">
+    <select id="findAll" resultType="User">
         select * from user
     </select>
     
-    <insert id="insertUser" parameterType="com.iccKevin.domain.User">
+    <insert id="insertUser" parameterType="User">
         <!-- 配置保存时获取插入的 id，插入成功后作为参数返回到User对象的id属性中 -->
         <!-- keyColumn对应数据库中的列名，keyProperty是结果集的属性名-->
         <selectKey keyColumn="id" keyProperty="id" resultType="int">
@@ -25,23 +25,23 @@
         delete from user where id = #{id}
     </delete>
 
-    <update id="updateUser" parameterType="com.iccKevin.domain.User">
+    <update id="updateUser" parameterType="User">
         update user
         set username=#{username},sex=#{sex},address=#{address},birthday=#{birthday}
         where id=#{id}
     </update>
 
-    <select id="findById" resultType="com.iccKevin.domain.User">
+    <select id="findById" resultType="User">
         select * from user
         where id=#{id}
     </select>
 
-    <select id="findByName" parameterType="string" resultType="com.iccKevin.domain.User">
+    <select id="findByName" parameterType="string" resultType="User">
         select * from user
         where username like #{name}
     </select>
 
-    <select id="findByVo" parameterType="com.iccKevin.domain.QueryVo" resultType="com.iccKevin.domain.User">
+    <select id="findByVo" parameterType="QueryVo" resultType="User">
         <!-- 其实是QueryVo.user.username,但被OGNL表达式省略了-->
         select * from user
         where username like #{user.username}

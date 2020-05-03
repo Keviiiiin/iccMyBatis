@@ -141,7 +141,7 @@ from user
 
 ```xml
 <!-- 配置查询结果的列名和实体类的属性名的对应关系 -->
-<resultMap id="suibianxie" type="uSeR">
+<resultMap id="suibianxie" type="com.iccKevin.domain.User">
     <!-- 主键字段的对应 -->
     <id property="userId" column="id"></id>
     <!--非主键字段的对应-->
