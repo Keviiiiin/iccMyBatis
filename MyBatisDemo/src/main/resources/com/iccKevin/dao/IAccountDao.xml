@@ -8,21 +8,18 @@
 
     <!-- 建立对应关系 -->
     <resultMap type="account" id="accountMap">
-        <id column="aid" property="id"/>
+        <id column="id" property="id"/>
         <result column="uid" property="uid"/>
         <result column="money" property="money"/>
         <!-- 用于指定从表的引用实体属性 -->
-        <association property="user" javaType="user">
-            <id column="id" property="id"/>
-            <result column="username" property="username"/>
-            <result column="sex" property="sex"/>
-            <result column="birthday" property="birthday"/>
-            <result column="address" property="address"/>
-        </association>
+        <!-- 把column属性的值作为参数传给select属性中的方法 -->
+        <association property="user" javaType="user"
+                     select="com.iccKevin.dao.IUserDao.findById"
+                     column="uid"></association>
     </resultMap>
 
     <select id="findAll" resultMap="accountMap">
-        select u.*,a.id as aid,a.uid,a.money from account a,user u where a.uid =u.id;
+        select * from account
     </select>
 
 </mapper>
