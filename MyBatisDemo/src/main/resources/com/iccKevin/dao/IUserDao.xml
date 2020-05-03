@@ -7,14 +7,13 @@
 <!--命名空间写dao接口的全限定类名-->
 <!--可能有多个数据库表需要查询，所以需要将命名空间（类名）和id组合在一起才能定位到SQL语句-->
 <mapper namespace="com.iccKevin.dao.IUserDao">
-    <!--配置查询所有-->
+
     <select id="findAll" resultType="User">
         select * from user
     </select>
     
     <insert id="insertUser" parameterType="User">
         <!-- 配置保存时获取插入的 id，插入成功后作为参数返回到User对象的id属性中 -->
-        <!-- keyColumn对应数据库中的列名，keyProperty是结果集的属性名-->
         <selectKey keyColumn="id" keyProperty="id" resultType="int">
             select last_insert_id();
         </selectKey>
@@ -50,5 +49,17 @@
     <select id="findTotal" resultType="int">
         select count(id)
         from user
+    </select>
+
+    <select id="findByCondition" resultType="user" parameterType="user">
+        select * from user
+        <where>
+            <if test="username!=null and username != '' ">
+                and username like #{username}
+            </if>
+            <if test="address != null">
+                and address like #{address}
+            </if>
+        </where>
     </select>
 </mapper>

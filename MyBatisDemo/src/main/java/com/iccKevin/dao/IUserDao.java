@@ -61,4 +61,11 @@ public interface IUserDao {
      * @return
      */
     int findTotal();
+
+    /**
+     * 根据传入的条件查询
+     * @param user
+     * @return
+     */
+    List<User> findByCondition(User user);
 }

@@ -101,4 +101,14 @@ public class TestCRUD {
         int count = userDao.findTotal();
         System.out.println("共有"+count+"条记录");
     }
+
+    @Test
+    public void testFindByCondition(){
+        //因为配置文件中设置了查询条件（if标签），所以当username和address不为空时会忽略其他条件
+        User user = new User(1,"老王",new Date(20201201),"男","北京");
+        List<User> users = userDao.findByCondition(user);
+        for (User u : users) {
+            System.out.println(u);
+        }
+    }
 }
