@@ -62,4 +62,16 @@
             </if>
         </where>
     </select>
+
+    <select id="findInIds" resultType="user" parameterType="queryvo">
+    <!-- select * from user where id in (1,2,3) -->
+        select * from user
+        <where>
+            <if test="ids != null and ids.size() > 0">
+                <foreach collection="ids" open="id in ( " close=")" item="uid" separator=",">
+                    #{uid}
+                </foreach>
+            </if>
+        </where>
+    </select>
 </mapper>

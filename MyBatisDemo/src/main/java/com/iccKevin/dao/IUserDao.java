@@ -68,4 +68,11 @@ public interface IUserDao {
      * @return
      */
     List<User> findByCondition(User user);
+
+    /**
+     * 查询id集合中的用户
+     * @param vo
+     * @return
+     */
+    List<User> findInIds(QueryVo vo);
 }

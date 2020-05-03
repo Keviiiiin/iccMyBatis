@@ -14,6 +14,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -107,6 +108,21 @@ public class TestCRUD {
         //因为配置文件中设置了查询条件（if标签），所以当username和address不为空时会忽略其他条件
         User user = new User(1,"老王",new Date(20201201),"男","北京");
         List<User> users = userDao.findByCondition(user);
+        for (User u : users) {
+            System.out.println(u);
+        }
+    }
+
+    @Test
+    public void testFindInIds(){
+        QueryVo vo = new QueryVo();
+        List<Integer> ids = new ArrayList<>();
+        ids.add(41);
+        ids.add(42);
+        ids.add(46);
+        vo.setIds(ids);
+
+        List<User> users = userDao.findInIds(vo);
         for (User u : users) {
             System.out.println(u);
         }
