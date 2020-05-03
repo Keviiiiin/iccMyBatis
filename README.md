@@ -131,7 +131,6 @@ _注意_
 ### 解决方法一：别名查询
 
 ```sql
--- 其中，id,username是数据库列名，userId,userName是属性名
 select id as userId,username as userName,address as userAddress,sex as userSex,birthday as userBirthday
 from user
 ```

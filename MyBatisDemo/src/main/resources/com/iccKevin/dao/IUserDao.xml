@@ -8,13 +8,26 @@
 <!--可能有多个数据库表需要查询，所以需要将命名空间（类名）和id组合在一起才能定位到SQL语句-->
 <mapper namespace="com.iccKevin.dao.IUserDao">
 
+    <resultMap id="userAccountMap" type="user">
+        <id property="id" column="id"></id>
+        <result property="username" column="username"></result>
+        <result property="birthday" column="birthday"></result>
+        <result property="sex" column="sex"></result>
+        <result property="address" column="address"></result>
+        <collection property="accounts" ofType="account">
+            <id column="aid" property="id"></id>
+            <result property="uid" column="uid"></result>
+            <result property="money" column="money"></result>
+        </collection>
+    </resultMap>
+
     <!-- 抽取重复的语句代码片段 -->
     <sql id="defaultSelect">
         select * from user
     </sql>
 
-    <select id="findAll" resultType="User">
-        <include refid="defaultSelect"></include>
+    <select id="findAll" resultMap="userAccountMap">
+        select u.*,a.id as aid,a.uid,a.money from user u left join account a on u.id = a.uid
     </select>
     
     <insert id="insertUser" parameterType="User">

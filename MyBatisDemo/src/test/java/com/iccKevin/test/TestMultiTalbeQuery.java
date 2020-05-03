@@ -3,6 +3,7 @@ package com.iccKevin.test;
 import com.iccKevin.dao.IAccountDao;
 import com.iccKevin.dao.IUserDao;
 import com.iccKevin.domain.Account;
+import com.iccKevin.domain.User;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -22,6 +23,7 @@ import java.util.List;
  **/
 public class TestMultiTalbeQuery {
     private IAccountDao accountDao;
+    private IUserDao userDao;
     private SqlSession session;
     private InputStream is;
     @Before
@@ -31,6 +33,7 @@ public class TestMultiTalbeQuery {
         SqlSessionFactory factory = builder.build(is);
         session = factory.openSession();
         accountDao = session.getMapper(IAccountDao.class);
+        userDao = session.getMapper(IUserDao.class);
     }
     @After
     public void destroy() throws IOException {
@@ -39,11 +42,19 @@ public class TestMultiTalbeQuery {
         is.close();
     }
     @Test
-    public void TestFindAll(){
+    public void TestAccountFindAll(){
         List<Account> accounts = accountDao.findAll();
         for (Account account : accounts) {
             System.out.println(account);
             System.out.println(account.getUser());
+        }
+    }
+    @Test
+    public void TestUserFindAll(){
+        List<User> users = userDao.findAll();
+        for (User u : users) {
+            System.out.println(u);
+            System.out.println(u.getAccounts());
         }
     }
 }

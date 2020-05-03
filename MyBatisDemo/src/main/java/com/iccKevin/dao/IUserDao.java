@@ -12,6 +12,7 @@ public interface IUserDao {
 
     /**
      * 查询所有操作
+     * 实现多表查询后，获得了用户对应的账户信息（可以为null）
      * @return
      */
     List<User> findAll();
