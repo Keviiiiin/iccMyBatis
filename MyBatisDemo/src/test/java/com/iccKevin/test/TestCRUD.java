@@ -119,7 +119,7 @@ public class TestCRUD {
         List<Integer> ids = new ArrayList<>();
         ids.add(41);
         ids.add(42);
-        ids.add(46);
+        ids.add(6);
         vo.setIds(ids);
 
         List<User> users = userDao.findInIds(vo);
