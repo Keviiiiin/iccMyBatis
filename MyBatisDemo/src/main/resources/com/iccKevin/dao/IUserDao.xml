@@ -8,8 +8,13 @@
 <!--可能有多个数据库表需要查询，所以需要将命名空间（类名）和id组合在一起才能定位到SQL语句-->
 <mapper namespace="com.iccKevin.dao.IUserDao">
 
-    <select id="findAll" resultType="User">
+    <!-- 抽取重复的语句代码片段 -->
+    <sql id="defaultSelect">
         select * from user
+    </sql>
+
+    <select id="findAll" resultType="User">
+        <include refid="defaultSelect"></include>
     </select>
     
     <insert id="insertUser" parameterType="User">
@@ -31,18 +36,18 @@
     </update>
 
     <select id="findById" resultType="User">
-        select * from user
+        <include refid="defaultSelect"></include>
         where id=#{id}
     </select>
 
     <select id="findByName" parameterType="string" resultType="User">
-        select * from user
+        <include refid="defaultSelect"></include>
         where username like #{name}
     </select>
 
     <select id="findByVo" parameterType="QueryVo" resultType="User">
         <!-- 其实是QueryVo.user.username,但被OGNL表达式省略了-->
-        select * from user
+        <include refid="defaultSelect"></include>
         where username like #{user.username}
     </select>
 
@@ -52,7 +57,7 @@
     </select>
 
     <select id="findByCondition" resultType="user" parameterType="user">
-        select * from user
+        <include refid="defaultSelect"></include>
         <where>
             <if test="username!=null and username != '' ">
                 and username like #{username}
@@ -65,7 +70,7 @@
 
     <select id="findInIds" resultType="user" parameterType="queryvo">
     <!-- select * from user where id in (1,2,3) -->
-        select * from user
+        <include refid="defaultSelect"></include>
         <where>
             <if test="ids != null and ids.size() > 0">
                 <foreach collection="ids" open="id in ( " close=")" item="uid" separator=",">

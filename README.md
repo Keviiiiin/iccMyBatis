@@ -186,3 +186,23 @@ from user
 ## mybatis中的事务
    
 * 通过sqlsession对象的commit方法和rollback方法实现事务的提交和回滚
+
+## 动态sql
+
+* 通过<if> <where> <foreach>标签实现
+
+## 多表查询
+
+### 需求:查询所有账户信息，关联查询下单用户信息。
+
+* 方式一
+    
+    * 定义一个AccountUser类，继承Account类，并加入User类中的部分信息。这样sql语句查询的结果就被封装到了AccountUser类中
+    
+    * 该方式定义专门的 po 类作为输出类型，其中定义了 sql 查询结果集所有的字段。
+    
+* 方式二
+    
+    * 使用 resultMap，定义专门的 resultMap 用于映射一对一查询结果。
+    
+    * 我们可以在 Account 类中加入一个 User 类的对象来代表这个账户是哪个用户的。
