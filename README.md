@@ -252,16 +252,17 @@ _多对一，一对一：通常情况下采用立即加载。_
     * 数据的正确与否对最终结果影响不大的。
 ### Mybatis中的一级缓存和二级缓存
     
-* 一级缓存：
-   
-    它指的是Mybatis中SqlSession对象的缓存。
-    当我们执行查询之后，查询的结果会同时存入到SqlSession为我们提供一块区域中。
-    该区域的结构是一个Map。当我们再次查询同样的数据，mybatis会先去sqlsession中查询是否有，有的话直接拿出来用。
-    当SqlSession对象消失时，mybatis的一级缓存也就消失了。
+#### 一级缓存：指的是Mybatis中SqlSession对象的缓存。
+    
+当我们执行查询之后，查询的结果会同时存入到SqlSession为我们提供一块区域中。
+该区域的结构是一个Map。当我们再次查询同样的数据，mybatis会先去sqlsession中查询是否有，有的话直接拿出来用。
+当SqlSession对象消失时，mybatis的一级缓存也就消失了。
+
+_**一级缓存是 SqlSession 范围的缓存，当调用 SqlSession 的修改，添加，删除， commit()， close()等方法时，就会清空一级缓存**_
    		
-* 二级缓存:
-  
-    它指的是Mybatis中SqlSessionFactory对象的缓存。由同一个SqlSessionFactory对象创建的SqlSession共享其缓存。
+#### 二级缓存:指的是Mybatis中SqlSessionFactory对象的缓存。
+
+_由同一个SqlSessionFactory对象创建的SqlSession共享其缓存。_
 
 * 二级缓存的使用步骤：
 
