@@ -10,6 +10,7 @@ import java.util.List;
  *
  * 用户的持久层接口
  */
+@CacheNamespace(blocking = true)
 public interface IUserDao {
 
     /**
@@ -56,5 +57,5 @@ public interface IUserDao {
      * @return
      */
     @Select("select * from user where id=#{id}")
-    List<User> findById(int id );
+    User findById(int id );
 }
