@@ -290,28 +290,33 @@ id 是否是主键字段
 column 数据库的列名
 property 需要装配的属性名
 one 需要使用的@One 注解（@Result（one=@One）（）））
-many 需要使用的@Many 注解（@Result（many=@many）（）））
+many 需要使用的@Many 注解（@Result（many=@many（）））
 #### @One 注解（一对一）
 代替了<assocation>标签，是多表查询的关键，在注解中用来指定子查询返回单一对象。
 @One 注解属性介绍：
 select 指定用来多表查询的 sqlmapper
 fetchType 会覆盖全局的配置参数 lazyLoadingEnabled。。
 
-**使用格式：
+**使用格式：**
+```java
 @Results({
     ...
     @Result(column="",property="",one=@One(select="",fetchType=))
-})**
+})
+```
+
 #### @Many 注解（多对一）
 代替了<Collection>标签,是是多表查询的关键，在注解中用来指定子查询返回对象集合。
 注意：聚集元素用来处理“一对多”的关系。需要指定映射的 Java 实体类的属性，属性的 javaType
 （一般为 ArrayList）但是注解中可以不定义；
 
-**使用格式：
+**使用格式：**
+```java
 @Results({
     ...
     @Result(property="",column="",many=@Many(select=""))
-})**
+})
+```
 
 ## 基于注解使用二级缓存
 
@@ -325,7 +330,7 @@ fetchType 会覆盖全局的配置参数 lazyLoadingEnabled。。
 </settings>
 ```
 
-* 2) dao接口中加入@CacheNamespace注解
+* 2)dao接口中加入@CacheNamespace注解
 
 ```java
 @CacheNamespace(blocking=true)//mybatis 基于注解方式实现配置二级缓存
