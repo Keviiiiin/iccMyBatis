@@ -1,11 +1,13 @@
 package com.iccKevin.domain;
 
+import java.io.Serializable;
+
 /**
  * @description: 角色信息的实体类
  * @author: iccKevin
  * @create: 2020-05-03 20:37
  **/
-public class Role {
+public class Role implements Serializable {
     private Integer id;
     private String roleName;
     private String roleDesc;

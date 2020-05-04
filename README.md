@@ -61,7 +61,10 @@
 
 ## mybatis基于注解的入门案例：
 
-* 把IUserDao.xml(Mapper)移除，在dao接口的方法上使用@Select注解，并且指定SQL语句
+* 只需要在Dao接口对应的方法上加注解、写sql语句，然后写测试运行方法即可。
+
+* 把IUserDao.xml(Mapper)移除，在dao接口的方法上使用@Select注解，并且指定SQL语句。_注解和配置文件不能同时存在_
+
 * 同时,需要在SqlMapConfig.xml中的mapper配置时，使用class属性（而不是resource)指定dao接口的全限定类名。
 
 _明确：

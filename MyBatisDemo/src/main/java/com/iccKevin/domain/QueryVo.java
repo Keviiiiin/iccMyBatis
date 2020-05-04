@@ -1,5 +1,6 @@
 package com.iccKevin.domain;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -7,7 +8,7 @@ import java.util.List;
  * @author: iccKevin
  * @create: 2020-05-02 17:45
  **/
-public class QueryVo {
+public class QueryVo implements Serializable {
 
     private User user;
     //加入一个 List 集合用于封装参数
