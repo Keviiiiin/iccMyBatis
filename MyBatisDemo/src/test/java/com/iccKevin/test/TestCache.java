@@ -22,11 +22,12 @@ public class TestCache {
     private IUserDao userDao;
     private SqlSession session;
     private InputStream is;
+    SqlSessionFactory factory;
     @Before
     public void init() throws IOException {
         is = Resources.getResourceAsStream("SqlMapConfig.xml");
         SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
-        SqlSessionFactory factory = builder.build(is);
+        factory = builder.build(is);
         session = factory.openSession();
         userDao = session.getMapper(IUserDao.class);
     }
@@ -69,4 +70,24 @@ public class TestCache {
         System.out.println(user1 == user2);
     }
 
+    /**
+     * 测试二级缓存
+     */
+    @Test
+    public void testSecondLevelCache(){
+        SqlSession session1 = factory.openSession();
+        IUserDao ud1 = session1.getMapper(IUserDao.class);
+        User user1 = ud1.findById(43);
+        System.out.println(user1);
+
+        session1.close();
+
+        SqlSession session2 = factory.openSession();
+        IUserDao ud2 = session2.getMapper(IUserDao.class);
+        User user2 = ud2.findById(43);
+        System.out.println(user2);
+        session2.close();
+
+        System.out.println(user1 == user2);
+    }
 }

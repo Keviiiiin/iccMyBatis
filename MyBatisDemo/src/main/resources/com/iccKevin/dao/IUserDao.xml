@@ -8,6 +8,7 @@
 <!--可能有多个数据库表需要查询，所以需要将命名空间（类名）和id组合在一起才能定位到SQL语句-->
 <mapper namespace="com.iccKevin.dao.IUserDao">
 
+    <cache></cache>
     <resultMap id="userAccountMap" type="user">
         <id property="id" column="id"></id>
         <result property="username" column="username"></result>
@@ -63,7 +64,7 @@
         where id=#{id}
     </update>
 
-    <select id="findById" resultType="User">
+    <select id="findById" resultType="User" useCache="true">
         <include refid="defaultSelect"></include>
         where id=#{id}
     </select>

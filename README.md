@@ -219,7 +219,7 @@ from user
 * 问题：在查询用户时，用户下的账户信息应该是什么时候用什么时候查。而在查询账户时，账户的所属用户信息应该是随着账户查询时一起查询出来。
     
 * 什么是延迟加载
-    * 在真正使用数据时才发起查询，不用的时候不查询。按需加载（懒加载）
+    * 先查询主表信息，若用到从表数据，再去查询从表信息，用不到，就不查询。按需加载（懒加载）
 * 什么是立即加载
     * 不管用不用，只要一调用方法，马上发起查询。
     	
@@ -258,7 +258,7 @@ _多对一，一对一：通常情况下采用立即加载。_
 该区域的结构是一个Map。当我们再次查询同样的数据，mybatis会先去sqlsession中查询是否有，有的话直接拿出来用。
 当SqlSession对象消失时，mybatis的一级缓存也就消失了。
 
-_**一级缓存是 SqlSession 范围的缓存，当调用 SqlSession 的修改，添加，删除， commit()， close()等方法时，就会清空一级缓存**_
+_一级缓存是 SqlSession 范围的缓存，当调用 SqlSession 的修改，添加，删除， commit()， close()等方法时，就会清空一级缓存_
    		
 #### 二级缓存:指的是Mybatis中SqlSessionFactory对象的缓存。
 
@@ -266,8 +266,10 @@ _由同一个SqlSessionFactory对象创建的SqlSession共享其缓存。_
 
 * 二级缓存的使用步骤：
 
-    第一步：让Mybatis框架支持二级缓存（在SqlMapConfig.xml中配置）
+    第一步：让Mybatis框架支持二级缓存（在SqlMapConfig.xml中配置），默认cacheEnabled就是true
 
     第二步：让当前的映射文件支持二级缓存（在IUserDao.xml中配置）
 
     第三步：让当前的操作支持二级缓存（在select标签中配置）
+    
+* 注意：SqlSessionFactory中存放的只是数据，SqlSession调用时不用发起新的查询，但要重新封装对象。
