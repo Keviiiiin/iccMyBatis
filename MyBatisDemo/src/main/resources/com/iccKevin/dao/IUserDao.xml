@@ -14,11 +14,7 @@
         <result property="birthday" column="birthday"></result>
         <result property="sex" column="sex"></result>
         <result property="address" column="address"></result>
-        <collection property="accounts" ofType="account">
-            <id column="aid" property="id"></id>
-            <result property="uid" column="uid"></result>
-            <result property="money" column="money"></result>
-        </collection>
+        <collection property="accounts" ofType="account" select="com.iccKevin.dao.IAccountDao.findByUid" column="id"></collection>
     </resultMap>
 
     <resultMap id="userRoleMap" type="user">
@@ -40,7 +36,7 @@
     </sql>
 
     <select id="findAll" resultMap="userAccountMap">
-        select u.*,a.id as aid,a.uid,a.money from user u left join account a on u.id = a.uid
+        <include refid="defaultSelect"></include>
     </select>
 
     <select id="findRole" resultMap="userRoleMap">
