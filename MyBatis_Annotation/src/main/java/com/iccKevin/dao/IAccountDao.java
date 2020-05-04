@@ -18,7 +18,14 @@ public interface IAccountDao {
             @Result(id=true,column = "id",property = "id"),
             @Result(column = "uid",property = "uid"),
             @Result(column = "money",property = "money"),
-            @Result(property = "user",column = "uid",one = @One(select = "com.iccKevin.dao.IUserDao.findById",fetchType = FetchType.EAGER))
+            @Result(property = "user",column = "uid",
+                    one = @One(select = "com.iccKevin.dao.IUserDao.findById",fetchType = FetchType.EAGER))
     })
     List<Account> findAll();
+
+    /**
+     * 根据uid查询账户
+     */
+    @Select("select * from account where uid=#{uid}")
+    List<Account> findByUid(int uid);
 }

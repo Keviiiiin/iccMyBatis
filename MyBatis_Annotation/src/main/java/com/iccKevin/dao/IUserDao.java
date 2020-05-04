@@ -1,10 +1,8 @@
 package com.iccKevin.dao;
 
 import com.iccKevin.domain.User;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.mapping.FetchType;
 
 import java.util.List;
 
@@ -19,6 +17,17 @@ public interface IUserDao {
      * @return
      */
     @Select("select * from user")
+    @Results({
+            @Result(id=true,column = "id",property = "id"),
+            @Result(column = "username",property = "username"),
+            @Result(column = "birthday",property = "birthday"),
+            @Result(column = "sex",property = "sex"),
+            @Result(column = "address",property = "address"),
+//            注意，下面的column写id,因为要用用户的id作为参数传入findByUid方法
+            @Result(property = "accounts",column = "id",
+                    many = @Many(select = "com.iccKevin.dao.IAccountDao.findByUid",fetchType = FetchType.LAZY))
+
+    })
     List<User> findAll();
 
     /**
