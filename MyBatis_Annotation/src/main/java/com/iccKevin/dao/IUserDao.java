@@ -41,4 +41,11 @@ public interface IUserDao {
      */
     @Delete("delete from user where id=#{id}")
     void deleteUser(int id);
+
+    /**
+     * 根据id查询
+     * @return
+     */
+    @Select("select * from user where id=#{id}")
+    List<User> findById(int id );
 }
