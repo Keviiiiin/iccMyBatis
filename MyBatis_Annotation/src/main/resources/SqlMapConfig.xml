@@ -22,6 +22,7 @@
     </environments>
 
     <mappers>
-        <mapper class="com.iccKevin.dao.IUserDao"/>
+        <package name="com.iccKevin.dao"></package>
+
     </mappers>
 </configuration>

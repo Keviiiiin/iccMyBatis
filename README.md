@@ -276,3 +276,31 @@ _由同一个SqlSessionFactory对象创建的SqlSession共享其缓存。_
     第三步：让当前的操作支持二级缓存（在select标签中配置）
     
 * 注意：SqlSessionFactory中存放的只是数据，SqlSession调用时不用发起新的查询，但要重新封装对象。
+
+## 复杂关系映射的注解
+
+#### @Results 注解
+    代替的是标签<resultMap>
+    该注解中可以使用单个@Result 注解，也可以使用@Result 集合
+    @Results（{@Result()， @Result()}）或@Results（@Result()）
+#### @Result 注解
+代替了 <id>标签和<result>标签
+@Result 中 属性介绍：
+id 是否是主键字段
+column 数据库的列名
+property 需要装配的属性名
+one 需要使用的@One 注解（@Result（one=@One）（）））
+many 需要使用的@Many 注解（@Result（many=@many）（）））
+#### @One 注解（一对一）
+代替了<assocation>标签，是多表查询的关键，在注解中用来指定子查询返回单一对象。
+@One 注解属性介绍：
+select 指定用来多表查询的 sqlmapper
+fetchType 会覆盖全局的配置参数 lazyLoadingEnabled。。
+使用格式：
+@Result(column=" ",property="",one=@One(select=""))
+#### @Many 注解（多对一）
+代替了<Collection>标签,是是多表查询的关键，在注解中用来指定子查询返回对象集合。
+注意：聚集元素用来处理“一对多”的关系。需要指定映射的 Java 实体类的属性，属性的 javaType
+（一般为 ArrayList）但是注解中可以不定义；
+使用格式：
+@Result(property="",column="",many=@Many(select=""))
